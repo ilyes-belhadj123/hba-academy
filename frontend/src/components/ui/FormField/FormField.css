@@ -1,0 +1,20 @@
+.hba-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hba-space-xs);
+  font-family: var(--hba-font-family);
+  font-size: var(--hba-font-size-sm);
+  font-weight: var(--hba-font-weight-medium);
+  color: var(--hba-color-text-secondary);
+}
+
+.hba-form-field input,
+.hba-form-field select,
+.hba-form-field textarea {
+  padding: 0.55rem 0.6rem;
+  border-radius: var(--hba-radius-sm);
+  border: 1px solid var(--hba-color-border);
+  font-size: var(--hba-font-size-base);
+  font-weight: 400;
+  font-family: inherit;
+}

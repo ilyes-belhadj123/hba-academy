@@ -1,0 +1,32 @@
+.cookie-consent-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: var(--hba-color-text);
+  color: #fff;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cookie-consent-banner p {
+  margin: 0;
+  font-size: 0.85rem;
+  max-width: 640px;
+}
+
+.cookie-consent-banner a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.cookie-consent-banner__actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}

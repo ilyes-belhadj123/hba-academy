@@ -1,0 +1,10 @@
+.hba-badge {
+  display: inline-block;
+  background: var(--hba-color-primary-bg);
+  color: var(--hba-color-primary-text);
+  border-radius: var(--hba-radius-pill);
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: var(--hba-font-weight-medium);
+  font-family: var(--hba-font-family);
+}

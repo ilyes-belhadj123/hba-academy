@@ -1,0 +1,26 @@
+.hba-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 1rem 5rem;
+  border-top: 1px solid var(--hba-color-border-muted);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--hba-color-text-muted);
+}
+
+.hba-footer nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.hba-footer nav a {
+  color: var(--hba-color-text-muted);
+  text-decoration: none;
+}
+
+.hba-footer nav a:hover {
+  text-decoration: underline;
+}

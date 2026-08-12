@@ -1,0 +1,34 @@
+.hba-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--hba-color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--hba-radius-pill);
+  padding: 0.65rem 1.4rem;
+  font-family: var(--hba-font-family);
+  font-size: var(--hba-font-size-base);
+  font-weight: var(--hba-font-weight-medium);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.hba-button:hover:not(:disabled) {
+  background: var(--hba-color-primary-hover);
+}
+
+.hba-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hba-button--secondary {
+  background: var(--hba-color-neutral-bg);
+  color: var(--hba-color-text);
+}
+
+.hba-button--secondary:hover:not(:disabled) {
+  background: var(--hba-color-border-muted);
+}

@@ -1,0 +1,6 @@
+.hba-card {
+  background: var(--hba-color-surface);
+  border: 1px solid var(--hba-color-border-muted);
+  border-radius: var(--hba-radius-md);
+  padding: var(--hba-space-lg);
+}

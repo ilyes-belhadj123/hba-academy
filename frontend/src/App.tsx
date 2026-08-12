@@ -1,5 +1,7 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ChatWidget } from './components/ChatWidget/ChatWidget'
+import { CookieConsentBanner } from './components/CookieConsentBanner/CookieConsentBanner'
+import { Footer } from './components/Footer/Footer'
 import { RequireAdmin } from './components/RequireAdmin/RequireAdmin'
 import { RequirePortail } from './components/RequirePortail/RequirePortail'
 import { CataloguePage } from './pages/CataloguePage'
@@ -19,6 +21,9 @@ import { AdminLoginPage } from './pages/admin/AdminLoginPage'
 import { AdminRealisationsPage } from './pages/admin/AdminRealisationsPage'
 import { AdminStatsPage } from './pages/admin/AdminStatsPage'
 import { AdminTemoignagesPage } from './pages/admin/AdminTemoignagesPage'
+import { CGUPage } from './pages/legal/CGUPage'
+import { MentionsLegalesPage } from './pages/legal/MentionsLegalesPage'
+import { PolitiqueConfidentialitePage } from './pages/legal/PolitiqueConfidentialitePage'
 import { PortailDashboardPage } from './pages/portail/PortailDashboardPage'
 import { PortailLoginPage } from './pages/portail/PortailLoginPage'
 
@@ -38,6 +43,9 @@ function App() {
         <Route path="/realisations" element={<RealisationsPage />} />
         <Route path="/orientation" element={<OrientationPage />} />
         <Route path="/certificats/verifier/:code" element={<CertificatVerificationPage />} />
+        <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
+        <Route path="/politique-confidentialite" element={<PolitiqueConfidentialitePage />} />
+        <Route path="/conditions-generales" element={<CGUPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route
           path="/admin/formations"
@@ -105,7 +113,9 @@ function App() {
           }
         />
       </Routes>
+      {!isPrivateRoute && <Footer />}
       {!isPrivateRoute && <ChatWidget />}
+      {!isPrivateRoute && <CookieConsentBanner />}
     </>
   )
 }

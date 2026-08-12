@@ -1,0 +1,45 @@
+/* Design tokens HBA — source unique de vérité pour couleurs, espacements et rayons.
+   Toute nouvelle interface doit consommer ces variables plutôt que des valeurs codées en dur. */
+:root {
+  /* Couleurs de marque */
+  --hba-color-primary: #6c4bd6;
+  --hba-color-primary-hover: #5b3dbd;
+  --hba-color-primary-bg: #ece6fb;
+  --hba-color-primary-bg-strong: #f1ecfb;
+  --hba-color-primary-text: #3f2b8c;
+
+  /* Neutres */
+  --hba-color-surface: #ffffff;
+  --hba-color-surface-muted: #fafafa;
+  --hba-color-border: #d8d8e0;
+  --hba-color-border-muted: #e2e2e8;
+  --hba-color-text: #0b0b0b;
+  --hba-color-text-secondary: #444444;
+  --hba-color-text-muted: #666666;
+  --hba-color-neutral-bg: #f0f0f4;
+
+  /* Statuts */
+  --hba-color-success: #2e7d32;
+  --hba-color-success-bg: #e8f5e9;
+  --hba-color-error: #b3261e;
+  --hba-color-error-bg: #fdecea;
+
+  /* Typographie */
+  --hba-font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --hba-font-size-sm: 0.85rem;
+  --hba-font-size-base: 0.95rem;
+  --hba-font-size-lg: 1.1rem;
+  --hba-font-weight-medium: 600;
+
+  /* Espacements */
+  --hba-space-xs: 0.3rem;
+  --hba-space-sm: 0.5rem;
+  --hba-space-md: 0.75rem;
+  --hba-space-lg: 1rem;
+  --hba-space-xl: 1.5rem;
+
+  /* Rayons */
+  --hba-radius-sm: 0.5rem;
+  --hba-radius-md: 0.75rem;
+  --hba-radius-pill: 999px;
+}
