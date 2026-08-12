@@ -1,0 +1,24 @@
+.stats-counters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.stats-counters__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6c4bd6;
+}
+
+.stats-counters__label {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .stats-counters {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

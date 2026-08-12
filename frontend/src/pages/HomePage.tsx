@@ -1,12 +1,20 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchRealisations } from '../api/realisations'
 import { ProfileSelector } from '../components/ProfileSelector/ProfileSelector'
 import { getProfileById } from '../data/profiles'
 import { useVisitorProfile } from '../hooks/useVisitorProfile'
+import type { Realisation } from '../types/realisation'
 import './HomePage.css'
 
 export function HomePage() {
   const { profileId, selectProfile } = useVisitorProfile()
   const profile = getProfileById(profileId)
+  const [realisationsMisesEnAvant, setRealisationsMisesEnAvant] = useState<Realisation[]>([])
+
+  useEffect(() => {
+    fetchRealisations({ mise_en_avant: 'true' }).then(setRealisationsMisesEnAvant)
+  }, [])
 
   return (
     <main className="home-page">
@@ -33,6 +41,23 @@ export function HomePage() {
             <p>« {profile.temoignage.contenu} »</p>
             <cite>{profile.temoignage.auteur}</cite>
           </blockquote>
+        </section>
+      )}
+
+      {realisationsMisesEnAvant.length > 0 && (
+        <section className="home-page__realisations">
+          <h2>Ils nous font confiance</h2>
+          <div className="home-page__realisations-grid">
+            {realisationsMisesEnAvant.map((realisation) => (
+              <div key={realisation._id} className="home-page__realisation-card">
+                <strong>{realisation.valeur !== null ? realisation.valeur : realisation.titre}</strong>
+                <span>{realisation.description || realisation.titre}</span>
+              </div>
+            ))}
+          </div>
+          <Link to="/realisations" className="home-page__realisations-link">
+            Voir toutes nos réalisations
+          </Link>
         </section>
       )}
 

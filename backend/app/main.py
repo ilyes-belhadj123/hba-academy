@@ -10,7 +10,17 @@ from app.core.config import get_settings
 from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging
 from app.db.mongodb import close_mongo_connection, connect_to_mongo, ensure_indexes
-from app.routers import admin, auth, formateurs, formations, health, preinscriptions, sessions, temoignages
+from app.routers import (
+    admin,
+    auth,
+    formateurs,
+    formations,
+    health,
+    preinscriptions,
+    realisations,
+    sessions,
+    temoignages,
+)
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -54,6 +64,7 @@ def create_app() -> FastAPI:
     app.include_router(admin.router, prefix="/api")
     app.include_router(temoignages.router, prefix="/api")
     app.include_router(formateurs.router, prefix="/api")
+    app.include_router(realisations.router, prefix="/api")
 
     return app
 

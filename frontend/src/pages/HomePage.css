@@ -58,6 +58,55 @@
   color: #6c4bd6;
 }
 
+.home-page__realisations {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.home-page__realisations h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.home-page__realisations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.home-page__realisation-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #fafafa;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.home-page__realisation-card strong {
+  font-size: 1.5rem;
+  color: #6c4bd6;
+}
+
+.home-page__realisation-card span {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.home-page__realisations-link {
+  color: #6c4bd6;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .home-page__realisations-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .home-page__cta {
   display: flex;
   flex-wrap: wrap;

@@ -50,6 +50,7 @@ export function AdminFormationsPage() {
         <div>
           <Link to="/admin/temoignages">Témoignages</Link>
           <Link to="/admin/formateurs">Formateurs</Link>
+          <Link to="/admin/realisations">Réalisations</Link>
           <button type="button" onClick={logout}>
             Se déconnecter
           </button>

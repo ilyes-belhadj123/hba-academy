@@ -6,9 +6,16 @@ from app.core.errors import AppError
 from app.db.mongodb import get_db
 from app.models.formateur import FormateurIn, FormateurOut, FormateurUpdate
 from app.models.formation import FormationIn, FormationOut, FormationUpdate
+from app.models.realisation import RealisationIn, RealisationOut, RealisationUpdate
 from app.models.session import SessionIn, SessionOut, SessionUpdate
 from app.models.temoignage import TemoignageIn, TemoignageOut, TemoignageUpdate
-from app.services import formateurs_service, formations_service, sessions_service, temoignages_service
+from app.services import (
+    formateurs_service,
+    formations_service,
+    realisations_service,
+    sessions_service,
+    temoignages_service,
+)
 from app.services.storage_service import compress_image_if_needed, get_storage
 
 router = APIRouter(
@@ -120,3 +127,30 @@ async def delete_formateur(formateur_id: str, db: AsyncIOMotorDatabase = Depends
     deleted = await formateurs_service.delete_formateur(db, formateur_id)
     if not deleted:
         raise AppError("Formateur introuvable", status_code=status.HTTP_404_NOT_FOUND)
+
+
+@router.get("/realisations", response_model=list[RealisationOut])
+async def list_realisations(db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await realisations_service.list_all_realisations(db)
+
+
+@router.post("/realisations", response_model=RealisationOut, status_code=status.HTTP_201_CREATED)
+async def create_realisation(payload: RealisationIn, db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await realisations_service.create_realisation(db, payload)
+
+
+@router.put("/realisations/{realisation_id}", response_model=RealisationOut)
+async def update_realisation(
+    realisation_id: str, payload: RealisationUpdate, db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    realisation = await realisations_service.update_realisation(db, realisation_id, payload)
+    if realisation is None:
+        raise AppError("Réalisation introuvable", status_code=status.HTTP_404_NOT_FOUND)
+    return realisation
+
+
+@router.delete("/realisations/{realisation_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_realisation(realisation_id: str, db: AsyncIOMotorDatabase = Depends(get_db)):
+    deleted = await realisations_service.delete_realisation(db, realisation_id)
+    if not deleted:
+        raise AppError("Réalisation introuvable", status_code=status.HTTP_404_NOT_FOUND)

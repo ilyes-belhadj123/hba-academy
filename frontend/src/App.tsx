@@ -6,9 +6,11 @@ import { FormateursPage } from './pages/FormateursPage'
 import { FormationDetailPage } from './pages/FormationDetailPage'
 import { HomePage } from './pages/HomePage'
 import { PreuvesSocialesPage } from './pages/PreuvesSocialesPage'
+import { RealisationsPage } from './pages/RealisationsPage'
 import { AdminFormateursPage } from './pages/admin/AdminFormateursPage'
 import { AdminFormationsPage } from './pages/admin/AdminFormationsPage'
 import { AdminLoginPage } from './pages/admin/AdminLoginPage'
+import { AdminRealisationsPage } from './pages/admin/AdminRealisationsPage'
 import { AdminTemoignagesPage } from './pages/admin/AdminTemoignagesPage'
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
       <Route path="/formateurs" element={<FormateursPage />} />
       <Route path="/formateurs/:id" element={<FormateurDetailPage />} />
       <Route path="/preuves-sociales" element={<PreuvesSocialesPage />} />
+      <Route path="/realisations" element={<RealisationsPage />} />
       <Route path="/admin/login" element={<AdminLoginPage />} />
       <Route
         path="/admin/formations"
@@ -42,6 +45,14 @@ function App() {
         element={
           <RequireAdmin>
             <AdminFormateursPage />
+          </RequireAdmin>
+        }
+      />
+      <Route
+        path="/admin/realisations"
+        element={
+          <RequireAdmin>
+            <AdminRealisationsPage />
           </RequireAdmin>
         }
       />

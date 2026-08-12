@@ -1,0 +1,19 @@
+.realisations-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.realisations-page h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.realisations-page h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.realisations-page section {
+  margin-bottom: 2rem;
+}

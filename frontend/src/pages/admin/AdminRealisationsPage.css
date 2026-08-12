@@ -1,0 +1,70 @@
+.admin-realisations {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.admin-realisations__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.admin-realisations__header h1 {
+  font-size: 1.3rem;
+}
+
+.admin-realisations__header div {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.admin-realisations__header button {
+  background: #f0f0f4;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-realisations__add {
+  background: #6c4bd6;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.admin-realisations__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-realisations__table th,
+.admin-realisations__table td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-realisations__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-realisations__actions button {
+  border: none;
+  background: #f0f0f4;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
