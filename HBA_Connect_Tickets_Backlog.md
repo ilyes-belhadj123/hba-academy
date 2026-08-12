@@ -447,15 +447,152 @@ Collections MongoDB principales, partagées par plusieurs epics :
 
 ---
 
+## EPIC 6 — Qualité, sécurité & mise en production
+
+### HBA-024 — Pages légales & conformité RGPD
+**Priorité :** Haute · **Estimation :** 2 jours · **Dépendances :** HBA-001
+
+**Description :** Mise en place des pages légales obligatoires et du mécanisme de consentement, avec attention particulière aux données de mineurs (formations enfants/ados).
+
+**Tâches techniques :**
+- Pages statiques : mentions légales, politique de confidentialité, conditions générales d'utilisation
+- Bandeau de gestion du consentement (cookies/analytics) avant tout tracking
+- Champ de consentement parental explicite sur le formulaire de préinscription (HBA-015) lorsque l'apprenant est mineur
+- Mécanisme de demande de suppression/export des données personnelles (droit RGPD), même en version simple (formulaire de contact dédié + procédure manuelle documentée pour l'équipe HBA)
+
+**Critères d'acceptation :**
+- Aucune donnée personnelle n'est collectée avant consentement explicite
+- La préinscription d'un mineur exige le consentement parental avant validation
+
+---
+
+### HBA-025 — Suite de tests automatisés
+**Priorité :** Haute · **Estimation :** 5 jours · **Dépendances :** transverse, en continu sur chaque epic fonctionnel
+
+**Description :** Couverture de tests backend et frontend sur les parcours critiques.
+
+**Tâches techniques :**
+- Backend : tests unitaires (pytest) sur les endpoints critiques (préinscription, recommandation IA, chatbot, authentification)
+- Frontend : tests de composants (Vitest/React Testing Library) sur les formulaires et le catalogue filtrable
+- Test de non-régression sur le calcul des places restantes (HBA-014) : scénario de préinscriptions simultanées
+- Intégration des tests dans le pipeline CI/CD (blocage du déploiement si tests en échec)
+
+**Critères d'acceptation :**
+- Les parcours de conversion (préinscription, chatbot, simulateur) sont couverts par au moins un test automatisé chacun
+- Le pipeline CI/CD bloque un déploiement si un test échoue
+
+---
+
+### HBA-026 — Mise en production, monitoring & sauvegardes
+**Priorité :** Haute · **Estimation :** 3 jours · **Dépendances :** HBA-001, tous les modules fonctionnels
+
+**Description :** Passage en production sécurisé et supervisé.
+
+**Tâches techniques :**
+- Configuration du nom de domaine définitif et certificat SSL
+- Mise en place du monitoring (disponibilité, temps de réponse, erreurs serveur) avec alerte à l'équipe technique
+- Sauvegardes automatiques quotidiennes de MongoDB avec procédure de restauration testée
+- Séparation stricte des environnements (staging vs production) avec variables d'environnement dédiées et secrets jamais commités dans le code
+
+**Critères d'acceptation :**
+- Une alerte est déclenchée en cas d'indisponibilité de la plateforme
+- Une restauration de sauvegarde a été testée avec succès avant le lancement officiel
+
+---
+
+### HBA-027 — Formation de l'équipe HBA au backoffice
+**Priorité :** Moyenne · **Estimation :** 1 jour · **Dépendances :** HBA-018, HBA-021
+
+**Description :** Session de formation pratique de l'équipe administrative du centre à l'utilisation du backoffice.
+
+**Tâches techniques :**
+- Rédaction d'un guide d'utilisation simple (captures d'écran, sans jargon technique) : ajout d'une formation, gestion des leads, publication d'un témoignage, ajout d'une réalisation
+- Session pratique avec l'équipe HBA sur l'environnement staging avant le lancement
+
+**Critères d'acceptation :**
+- L'équipe HBA est capable de publier une formation et un témoignage en autonomie, sans assistance, à l'issue de la session
+
+---
+
+### HBA-028 — SEO technique & performance
+**Priorité :** Moyenne · **Estimation :** 2 jours · **Dépendances :** HBA-002, HBA-003, HBA-004
+
+**Description :** Optimisation du référencement naturel et des performances de chargement.
+
+**Tâches techniques :**
+- Sitemap XML généré automatiquement, fichier robots.txt
+- Meta tags dynamiques (titre, description, Open Graph) sur les pages formation, formateur et accueil
+- Audit Lighthouse (performance, accessibilité, SEO) avec correction des points bloquants
+- Compression et lazy loading systématique des images sur toute la vitrine
+
+**Critères d'acceptation :**
+- Score Lighthouse performance ≥ 80 sur mobile pour la page d'accueil et le catalogue
+- Sitemap accessible et à jour automatiquement à chaque nouvelle formation publiée
+
+---
+
+## EPIC 7 — Frontend transverse & design system
+
+### HBA-029 — Design system HBA (composants UI réutilisables)
+**Priorité :** Haute · **Estimation :** 3 jours · **Dépendances :** HBA-001
+
+**Description :** Bibliothèque de composants UI partagés pour garantir une cohérence visuelle sur toute la plateforme, alignée avec la charte graphique du centre HBA.
+
+**Tâches techniques :**
+- Définition des tokens de design (couleurs, typographie, espacements) en variables CSS/Tailwind, validées avec l'identité visuelle HBA existante (supports déjà produits : certificats, visuels de formation)
+- Composants de base réutilisables : boutons, champs de formulaire, cartes (formation/formateur/réalisation), badges de compétences, modales, notifications toast
+- Documentation courte des composants (Storybook ou équivalent léger) pour faciliter la réutilisation sur les prochains tickets
+
+**Critères d'acceptation :**
+- Tous les nouveaux composants développés dans les epics suivants réutilisent cette bibliothèque plutôt que du style ad hoc
+- Les couleurs et typographies sont centralisées (aucune couleur codée en dur dispersée dans le code)
+
+---
+
+### HBA-030 — Responsive, accessibilité & tests cross-device
+**Priorité :** Moyenne · **Estimation :** 3 jours · **Dépendances :** HBA-029, ensemble des pages publiques
+
+**Description :** Vérification et correction de l'expérience sur mobile, tablette et desktop, ainsi que des standards d'accessibilité de base.
+
+**Tâches techniques :**
+- Tests manuels sur les points de rupture principaux (mobile, tablette, desktop) pour chaque page publique
+- Vérification des contrastes de couleurs, navigation au clavier, attributs alt sur les images
+- Correction des comportements du widget chatbot et du questionnaire d'orientation sur petit écran (zones cliquables, clavier virtuel)
+
+**Critères d'acceptation :**
+- Aucune page publique ne casse visuellement sur les tailles d'écran courantes (mobile/tablette/desktop)
+- Les images ont des attributs alt, les formulaires sont navigables au clavier
+
+---
+
+### HBA-031 — Optimisation performance frontend
+**Priorité :** Basse · **Estimation :** 2 jours · **Dépendances :** HBA-028, HBA-029
+
+**Description :** Réduction du temps de chargement global de l'application.
+
+**Tâches techniques :**
+- Découpage du bundle (code splitting par route) pour éviter un chargement initial trop lourd
+- Lazy loading des composants non critiques (chatbot, galeries médias)
+- Mise en cache des réponses API peu volatiles (liste des formations, filières) côté frontend
+
+**Critères d'acceptation :**
+- Le bundle initial chargé sur la page d'accueil reste sous un seuil raisonnable (à valider en fonction des mesures Lighthouse de HBA-028)
+
+---
+
 ## Ordre de développement recommandé
 
-1. **Semaine 1-2 :** HBA-001 → HBA-002 → HBA-003 → HBA-018 (socle + catalogue + gestion admin en parallèle)
-2. **Semaine 3 :** HBA-004, HBA-005, HBA-014, HBA-015, HBA-022, HBA-023 (fiches formation, preuves sociales, RDV/préinscription, formateurs, réalisations)
-3. **Semaine 4-5 :** HBA-006 → HBA-007 → HBA-008 → HBA-009 (simulateur IA)
-4. **Semaine 6-7 :** HBA-010 → HBA-011 → HBA-012 → HBA-013 (chatbot)
-5. **Semaine 8-9 :** HBA-016 → HBA-017 (portail client + certificats)
-6. **Semaine 10 :** HBA-019 → HBA-020 → HBA-021 (backoffice avancé)
-7. **Semaine 11-12 :** recette, tests de charge, corrections, mise en production
+1. **Semaine 1 :** HBA-001 → HBA-029 (socle projet + design system, à poser avant tout le reste du frontend)
+2. **Semaine 1-2 :** HBA-002 → HBA-003 → HBA-018 → HBA-024 (vitrine + catalogue + backoffice + conformité RGPD dès le départ)
+3. **Semaine 3 :** HBA-004, HBA-005, HBA-014, HBA-015, HBA-022, HBA-023
+4. **Semaine 4-5 :** HBA-006 → HBA-007 → HBA-008 → HBA-009 (simulateur IA)
+5. **Semaine 6-7 :** HBA-010 → HBA-011 → HBA-012 → HBA-013 (chatbot)
+6. **Semaine 8-9 :** HBA-016 → HBA-017 (portail client + certificats)
+7. **Semaine 10 :** HBA-019 → HBA-020 → HBA-021 (backoffice avancé)
+8. **Semaine 11 :** HBA-025 (tests, en continu depuis le début mais consolidés ici) → HBA-030 → HBA-031 → HBA-028
+9. **Semaine 12 :** HBA-026 → HBA-027 → recette finale, corrections, mise en production
+
+**Note :** HBA-025 (tests) et HBA-029 (design system) sont en réalité transverses et doivent être alimentés au fil de chaque epic, pas uniquement en fin de projet — leur placement ici indique le moment de consolidation finale, pas le seul moment de travail sur le sujet.
 
 ---
 
