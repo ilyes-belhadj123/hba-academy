@@ -7,6 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.core.config import get_settings
 from app.models.orientation import OrientationReponses
+from app.services.ai_utils import extract_json_from_content
 
 logger = logging.getLogger(__name__)
 
@@ -43,18 +44,6 @@ async def _get_catalogue_summary(db: AsyncIOMotorDatabase) -> list[dict]:
     ]
 
 
-def _extract_json(content: str) -> dict:
-    cleaned = content.strip()
-    if cleaned.startswith("```"):
-        cleaned = cleaned.strip("`")
-        if cleaned.lower().startswith("json"):
-            cleaned = cleaned[4:]
-    start, end = cleaned.find("{"), cleaned.rfind("}")
-    if start == -1 or end == -1:
-        raise ValueError(f"Aucun objet JSON trouvé dans la réponse du modèle : {content!r}")
-    return json.loads(cleaned[start : end + 1])
-
-
 def _call_openrouter(reponses: OrientationReponses, catalogue: list[dict]) -> dict:
     settings = get_settings()
     if not settings.openrouter_api_key:
@@ -84,7 +73,7 @@ def _call_openrouter(reponses: OrientationReponses, catalogue: list[dict]) -> di
     )
     response.raise_for_status()
     content = response.json()["choices"][0]["message"]["content"]
-    return _extract_json(content)
+    return extract_json_from_content(content)
 
 
 def _fallback_recommendation(reponses: OrientationReponses, catalogue: list[dict]) -> dict:

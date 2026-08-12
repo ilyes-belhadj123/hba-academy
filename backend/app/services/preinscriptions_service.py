@@ -32,7 +32,9 @@ async def _reserve_place(db: AsyncIOMotorDatabase, session_id: str) -> dict:
     return updated_session
 
 
-async def create_preinscription(db: AsyncIOMotorDatabase, payload: PreinscriptionIn) -> dict:
+async def create_preinscription(
+    db: AsyncIOMotorDatabase, payload: PreinscriptionIn, source: str = "vitrine"
+) -> dict:
     if payload.mineur and not payload.consentement_parental:
         raise AppError(
             "Le consentement parental est obligatoire pour un participant mineur",
@@ -42,7 +44,7 @@ async def create_preinscription(db: AsyncIOMotorDatabase, payload: Preinscriptio
     session = await _reserve_place(db, payload.session_id)
 
     lead = {
-        "source": "vitrine",
+        "source": source,
         "coordonnees": {"nom": payload.nom, "email": payload.email, "telephone": payload.telephone},
         "formation_interet": session["formation_id"],
         "statut": "converti",

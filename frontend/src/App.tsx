@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { ChatWidget } from './components/ChatWidget/ChatWidget'
 import { RequireAdmin } from './components/RequireAdmin/RequireAdmin'
 import { CataloguePage } from './pages/CataloguePage'
 import { FormateurDetailPage } from './pages/FormateurDetailPage'
@@ -15,50 +16,56 @@ import { AdminRealisationsPage } from './pages/admin/AdminRealisationsPage'
 import { AdminTemoignagesPage } from './pages/admin/AdminTemoignagesPage'
 
 function App() {
+  const location = useLocation()
+  const isAdminRoute = location.pathname.startsWith('/admin')
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/catalogue" element={<CataloguePage />} />
-      <Route path="/formations/:id" element={<FormationDetailPage />} />
-      <Route path="/formateurs" element={<FormateursPage />} />
-      <Route path="/formateurs/:id" element={<FormateurDetailPage />} />
-      <Route path="/preuves-sociales" element={<PreuvesSocialesPage />} />
-      <Route path="/realisations" element={<RealisationsPage />} />
-      <Route path="/orientation" element={<OrientationPage />} />
-      <Route path="/admin/login" element={<AdminLoginPage />} />
-      <Route
-        path="/admin/formations"
-        element={
-          <RequireAdmin>
-            <AdminFormationsPage />
-          </RequireAdmin>
-        }
-      />
-      <Route
-        path="/admin/temoignages"
-        element={
-          <RequireAdmin>
-            <AdminTemoignagesPage />
-          </RequireAdmin>
-        }
-      />
-      <Route
-        path="/admin/formateurs"
-        element={
-          <RequireAdmin>
-            <AdminFormateursPage />
-          </RequireAdmin>
-        }
-      />
-      <Route
-        path="/admin/realisations"
-        element={
-          <RequireAdmin>
-            <AdminRealisationsPage />
-          </RequireAdmin>
-        }
-      />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/catalogue" element={<CataloguePage />} />
+        <Route path="/formations/:id" element={<FormationDetailPage />} />
+        <Route path="/formateurs" element={<FormateursPage />} />
+        <Route path="/formateurs/:id" element={<FormateurDetailPage />} />
+        <Route path="/preuves-sociales" element={<PreuvesSocialesPage />} />
+        <Route path="/realisations" element={<RealisationsPage />} />
+        <Route path="/orientation" element={<OrientationPage />} />
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route
+          path="/admin/formations"
+          element={
+            <RequireAdmin>
+              <AdminFormationsPage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/temoignages"
+          element={
+            <RequireAdmin>
+              <AdminTemoignagesPage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/formateurs"
+          element={
+            <RequireAdmin>
+              <AdminFormateursPage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/realisations"
+          element={
+            <RequireAdmin>
+              <AdminRealisationsPage />
+            </RequireAdmin>
+          }
+        />
+      </Routes>
+      {!isAdminRoute && <ChatWidget />}
+    </>
   )
 }
 
