@@ -4,12 +4,16 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.core.deps import require_roles
 from app.core.errors import AppError
 from app.db.mongodb import get_db
+from app.models.apprenant import ApprenantIn, ApprenantOut, EnrollIn
+from app.models.document import DocumentOut
 from app.models.formateur import FormateurIn, FormateurOut, FormateurUpdate
 from app.models.formation import FormationIn, FormationOut, FormationUpdate
 from app.models.realisation import RealisationIn, RealisationOut, RealisationUpdate
 from app.models.session import SessionIn, SessionOut, SessionUpdate
 from app.models.temoignage import TemoignageIn, TemoignageOut, TemoignageUpdate
 from app.services import (
+    apprenants_service,
+    documents_service,
     formateurs_service,
     formations_service,
     realisations_service,
@@ -154,3 +158,39 @@ async def delete_realisation(realisation_id: str, db: AsyncIOMotorDatabase = Dep
     deleted = await realisations_service.delete_realisation(db, realisation_id)
     if not deleted:
         raise AppError("Réalisation introuvable", status_code=status.HTTP_404_NOT_FOUND)
+
+
+@router.get("/apprenants", response_model=list[ApprenantOut])
+async def list_apprenants(db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await apprenants_service.list_apprenants(db)
+
+
+@router.post("/apprenants", response_model=ApprenantOut, status_code=status.HTTP_201_CREATED)
+async def create_apprenant(payload: ApprenantIn, db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await apprenants_service.create_apprenant(db, payload)
+
+
+@router.post("/apprenants/{apprenant_id}/formations", response_model=ApprenantOut)
+async def enroll_apprenant(
+    apprenant_id: str, payload: EnrollIn, db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    apprenant = await apprenants_service.enroll(db, apprenant_id, payload)
+    if apprenant is None:
+        raise AppError("Apprenant introuvable", status_code=status.HTTP_404_NOT_FOUND)
+    return apprenant
+
+
+@router.post(
+    "/apprenants/{apprenant_id}/documents", response_model=DocumentOut, status_code=status.HTTP_201_CREATED
+)
+async def upload_document(
+    apprenant_id: str,
+    titre: str,
+    file: UploadFile,
+    formation_id: str | None = None,
+    db: AsyncIOMotorDatabase = Depends(get_db),
+):
+    content = await file.read()
+    storage = get_storage()
+    storage_url = await storage.save(content, file.filename or "document", file.content_type or "application/octet-stream")
+    return await documents_service.create_document(db, apprenant_id, titre, storage_url, formation_id)

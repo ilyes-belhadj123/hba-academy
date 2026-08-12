@@ -1,7 +1,9 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ChatWidget } from './components/ChatWidget/ChatWidget'
 import { RequireAdmin } from './components/RequireAdmin/RequireAdmin'
+import { RequirePortail } from './components/RequirePortail/RequirePortail'
 import { CataloguePage } from './pages/CataloguePage'
+import { CertificatVerificationPage } from './pages/CertificatVerificationPage'
 import { FormateurDetailPage } from './pages/FormateurDetailPage'
 import { FormateursPage } from './pages/FormateursPage'
 import { FormationDetailPage } from './pages/FormationDetailPage'
@@ -9,15 +11,18 @@ import { HomePage } from './pages/HomePage'
 import { OrientationPage } from './pages/OrientationPage'
 import { PreuvesSocialesPage } from './pages/PreuvesSocialesPage'
 import { RealisationsPage } from './pages/RealisationsPage'
+import { AdminApprenantsPage } from './pages/admin/AdminApprenantsPage'
 import { AdminFormateursPage } from './pages/admin/AdminFormateursPage'
 import { AdminFormationsPage } from './pages/admin/AdminFormationsPage'
 import { AdminLoginPage } from './pages/admin/AdminLoginPage'
 import { AdminRealisationsPage } from './pages/admin/AdminRealisationsPage'
 import { AdminTemoignagesPage } from './pages/admin/AdminTemoignagesPage'
+import { PortailDashboardPage } from './pages/portail/PortailDashboardPage'
+import { PortailLoginPage } from './pages/portail/PortailLoginPage'
 
 function App() {
   const location = useLocation()
-  const isAdminRoute = location.pathname.startsWith('/admin')
+  const isPrivateRoute = location.pathname.startsWith('/admin') || location.pathname.startsWith('/portail')
 
   return (
     <>
@@ -30,6 +35,7 @@ function App() {
         <Route path="/preuves-sociales" element={<PreuvesSocialesPage />} />
         <Route path="/realisations" element={<RealisationsPage />} />
         <Route path="/orientation" element={<OrientationPage />} />
+        <Route path="/certificats/verifier/:code" element={<CertificatVerificationPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route
           path="/admin/formations"
@@ -63,8 +69,25 @@ function App() {
             </RequireAdmin>
           }
         />
+        <Route
+          path="/admin/apprenants"
+          element={
+            <RequireAdmin>
+              <AdminApprenantsPage />
+            </RequireAdmin>
+          }
+        />
+        <Route path="/portail/login" element={<PortailLoginPage />} />
+        <Route
+          path="/portail"
+          element={
+            <RequirePortail>
+              <PortailDashboardPage />
+            </RequirePortail>
+          }
+        />
       </Routes>
-      {!isAdminRoute && <ChatWidget />}
+      {!isPrivateRoute && <ChatWidget />}
     </>
   )
 }

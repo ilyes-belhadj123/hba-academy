@@ -13,11 +13,13 @@ from app.db.mongodb import close_mongo_connection, connect_to_mongo, ensure_inde
 from app.routers import (
     admin,
     auth,
+    certificats,
     chatbot,
     formateurs,
     formations,
     health,
     orientation,
+    portail,
     preinscriptions,
     realisations,
     sessions,
@@ -69,6 +71,8 @@ def create_app() -> FastAPI:
     app.include_router(realisations.router, prefix="/api")
     app.include_router(orientation.router, prefix="/api")
     app.include_router(chatbot.router, prefix="/api")
+    app.include_router(portail.router, prefix="/api")
+    app.include_router(certificats.router, prefix="/api")
 
     return app
 

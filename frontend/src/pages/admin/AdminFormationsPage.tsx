@@ -51,6 +51,7 @@ export function AdminFormationsPage() {
           <Link to="/admin/temoignages">Témoignages</Link>
           <Link to="/admin/formateurs">Formateurs</Link>
           <Link to="/admin/realisations">Réalisations</Link>
+          <Link to="/admin/apprenants">Apprenants</Link>
           <button type="button" onClick={logout}>
             Se déconnecter
           </button>

@@ -72,6 +72,9 @@ export function HomePage() {
         <Link to="/formateurs" className="home-page__cta-secondary">
           Nos formateurs
         </Link>
+        <Link to="/portail/login" className="home-page__cta-secondary">
+          Espace apprenant
+        </Link>
       </div>
     </main>
   )

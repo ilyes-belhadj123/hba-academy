@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     storage_backend: str = "local"
     uploads_dir: str = "uploads"
     public_base_url: str = "http://localhost:8000"
+    frontend_base_url: str = "http://localhost:5173"
     azure_storage_connection_string: str | None = None
     azure_storage_container: str = "hba-connect-media"
 

@@ -1,0 +1,74 @@
+.portail-dashboard {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.portail-dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.portail-dashboard__header h1 {
+  font-size: 1.3rem;
+}
+
+.portail-dashboard__header button {
+  background: #f0f0f4;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.portail-dashboard section {
+  margin-bottom: 2rem;
+}
+
+.portail-dashboard section h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.portail-dashboard__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.portail-dashboard__list li {
+  border: 1px solid #e2e2e8;
+  border-radius: 0.6rem;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.portail-dashboard__list a {
+  color: #6c4bd6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.portail-dashboard__progress {
+  background: #eee;
+  border-radius: 999px;
+  height: 6px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.portail-dashboard__progress-bar {
+  background: #6c4bd6;
+  height: 100%;
+}
+
+.portail-dashboard__progress-label {
+  font-size: 0.75rem;
+  color: #888;
+}

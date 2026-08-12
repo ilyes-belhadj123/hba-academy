@@ -61,4 +61,7 @@ async def ensure_indexes() -> None:
     await db.realisations.create_index("mise_en_avant")
     await db.simulateur_logs.create_index("timestamp")
     await db.conversations_chatbot.create_index("session_id", unique=True)
+    await db.documents.create_index("apprenant_id")
+    await db.certificats.create_index("code_verification", unique=True)
+    await db.certificats.create_index("user_id")
     logger.info("MongoDB indexes ensured")

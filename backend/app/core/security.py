@@ -49,3 +49,22 @@ def decode_token(token: str) -> dict:
         return jwt.decode(token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm])
     except JWTError as error:
         raise ValueError("Token invalide ou expiré") from error
+
+
+def create_download_token(document_id: str, expires_minutes: int = 15) -> str:
+    settings = get_settings()
+    now = datetime.now(timezone.utc)
+    payload = {
+        "sub": document_id,
+        "type": "document_download",
+        "iat": now,
+        "exp": now + timedelta(minutes=expires_minutes),
+    }
+    return jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
+
+
+def decode_download_token(token: str) -> str:
+    payload = decode_token(token)
+    if payload.get("type") != "document_download":
+        raise ValueError("Token invalide")
+    return payload["sub"]
