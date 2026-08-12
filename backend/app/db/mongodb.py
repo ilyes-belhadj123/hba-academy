@@ -55,4 +55,6 @@ async def ensure_indexes() -> None:
     await db.preinscriptions.create_index("lead_id")
     await db.leads.create_index("source")
     await db.users.create_index("email", unique=True)
+    await db.formateurs.create_index("filieres")
+    await db.formateurs.create_index("formations_dispensees")
     logger.info("MongoDB indexes ensured")

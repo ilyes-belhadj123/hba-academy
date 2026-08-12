@@ -4,10 +4,11 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.core.deps import require_roles
 from app.core.errors import AppError
 from app.db.mongodb import get_db
+from app.models.formateur import FormateurIn, FormateurOut, FormateurUpdate
 from app.models.formation import FormationIn, FormationOut, FormationUpdate
 from app.models.session import SessionIn, SessionOut, SessionUpdate
 from app.models.temoignage import TemoignageIn, TemoignageOut, TemoignageUpdate
-from app.services import formations_service, sessions_service, temoignages_service
+from app.services import formateurs_service, formations_service, sessions_service, temoignages_service
 from app.services.storage_service import compress_image_if_needed, get_storage
 
 router = APIRouter(
@@ -97,3 +98,25 @@ async def delete_temoignage(temoignage_id: str, db: AsyncIOMotorDatabase = Depen
     deleted = await temoignages_service.delete_temoignage(db, temoignage_id)
     if not deleted:
         raise AppError("Témoignage introuvable", status_code=status.HTTP_404_NOT_FOUND)
+
+
+@router.post("/formateurs", response_model=FormateurOut, status_code=status.HTTP_201_CREATED)
+async def create_formateur(payload: FormateurIn, db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await formateurs_service.create_formateur(db, payload)
+
+
+@router.put("/formateurs/{formateur_id}", response_model=FormateurOut)
+async def update_formateur(
+    formateur_id: str, payload: FormateurUpdate, db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    formateur = await formateurs_service.update_formateur(db, formateur_id, payload)
+    if formateur is None:
+        raise AppError("Formateur introuvable", status_code=status.HTTP_404_NOT_FOUND)
+    return formateur
+
+
+@router.delete("/formateurs/{formateur_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_formateur(formateur_id: str, db: AsyncIOMotorDatabase = Depends(get_db)):
+    deleted = await formateurs_service.delete_formateur(db, formateur_id)
+    if not deleted:
+        raise AppError("Formateur introuvable", status_code=status.HTTP_404_NOT_FOUND)

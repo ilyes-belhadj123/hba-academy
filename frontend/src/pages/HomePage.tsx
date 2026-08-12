@@ -41,6 +41,9 @@ export function HomePage() {
         <Link to="/preuves-sociales" className="home-page__cta-secondary">
           Projets d'élèves & témoignages
         </Link>
+        <Link to="/formateurs" className="home-page__cta-secondary">
+          Nos formateurs
+        </Link>
       </div>
     </main>
   )

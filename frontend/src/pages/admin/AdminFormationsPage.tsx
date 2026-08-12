@@ -49,6 +49,7 @@ export function AdminFormationsPage() {
         <h1>Backoffice — Formations</h1>
         <div>
           <Link to="/admin/temoignages">Témoignages</Link>
+          <Link to="/admin/formateurs">Formateurs</Link>
           <button type="button" onClick={logout}>
             Se déconnecter
           </button>

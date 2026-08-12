@@ -1,0 +1,10 @@
+.formateurs-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.formateurs-page h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}

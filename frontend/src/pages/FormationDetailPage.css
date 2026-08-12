@@ -69,6 +69,16 @@
   margin-bottom: 1.5rem;
 }
 
+.formation-detail__formateurs {
+  margin-bottom: 1.5rem;
+}
+
+.formation-detail__formateurs a {
+  color: #6c4bd6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 .formation-detail__temoignages {
   margin-bottom: 2rem;
 }

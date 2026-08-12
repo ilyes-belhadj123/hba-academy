@@ -1,0 +1,66 @@
+.formateur-detail {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  text-align: center;
+}
+
+.formateur-detail__loading,
+.formateur-detail__not-found {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #666;
+}
+
+.formateur-detail__photo,
+.formateur-detail__photo-placeholder {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  background: #ece6fb;
+}
+
+.formateur-detail h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.formateur-detail__filieres {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.formateur-detail__filieres span {
+  background: #ece6fb;
+  color: #3f2b8c;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.formateur-detail__bio {
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.formateur-detail section {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.formateur-detail section h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.formateur-detail__formations a {
+  color: #6c4bd6;
+  font-weight: 600;
+  text-decoration: none;
+}

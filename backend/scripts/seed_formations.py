@@ -172,6 +172,31 @@ def _build_temoignages(formation_id) -> list[dict]:
     ]
 
 
+def _build_formateurs(sample_ids: list) -> list[dict]:
+    return [
+        {
+            "nom": "Formateur d'exemple A",
+            "photo": None,
+            "filieres": ["Langues"],
+            "bio": "Bio d'exemple : parcours et pédagogie à compléter par l'équipe HBA via le backoffice.",
+            "experiences_professionnelles": ["Exemple : 5 ans d'enseignement des langues"],
+            "certifications": ["Exemple : certification pédagogique"],
+            "formations_dispensees": [str(sample_ids[0])],
+            "temoignages_specifiques": [],
+        },
+        {
+            "nom": "Formateur d'exemple B",
+            "photo": None,
+            "filieres": ["Langues", "Développement personnel & Coaching"],
+            "bio": "Bio d'exemple : parcours et pédagogie à compléter par l'équipe HBA via le backoffice.",
+            "experiences_professionnelles": ["Exemple : 8 ans de coaching professionnel"],
+            "certifications": ["Exemple : certification coaching"],
+            "formations_dispensees": [str(sample_ids[0]), str(sample_ids[1])],
+            "temoignages_specifiques": [],
+        },
+    ]
+
+
 async def seed() -> None:
     settings = get_settings()
     connect_to_mongo()
@@ -181,19 +206,25 @@ async def seed() -> None:
     await db.formations.delete_many({})
     await db.sessions.delete_many({})
     await db.temoignages.delete_many({})
+    await db.formateurs.delete_many({})
 
     result = await db.formations.insert_many(EXAMPLE_FORMATIONS)
     print(f"{len(result.inserted_ids)} formations d'exemple insérées dans '{settings.mongodb_db_name}'.")
 
-    # Sessions et témoignages d'exemple pour les deux premières formations seulement,
-    # pour illustrer le calendrier et les avis sans avoir à peupler tout le catalogue.
+    # Sessions, témoignages et formateurs d'exemple pour les deux premières formations
+    # seulement, pour illustrer les fonctionnalités sans avoir à peupler tout le catalogue.
     sample_ids = result.inserted_ids[:2]
     sessions = [session for formation_id in sample_ids for session in _build_sessions(formation_id, now)]
     temoignages = [t for formation_id in sample_ids for t in _build_temoignages(formation_id)]
+    formateurs = _build_formateurs(sample_ids)
 
     await db.sessions.insert_many(sessions)
     await db.temoignages.insert_many(temoignages)
-    print(f"{len(sessions)} sessions et {len(temoignages)} témoignages d'exemple insérés.")
+    await db.formateurs.insert_many(formateurs)
+    print(
+        f"{len(sessions)} sessions, {len(temoignages)} témoignages et "
+        f"{len(formateurs)} formateurs d'exemple insérés."
+    )
 
     close_mongo_connection()
 

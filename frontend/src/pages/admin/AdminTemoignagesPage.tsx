@@ -60,6 +60,7 @@ export function AdminTemoignagesPage() {
         <h1>Backoffice — Témoignages</h1>
         <div>
           <Link to="/admin/formations">Formations</Link>
+          <Link to="/admin/formateurs">Formateurs</Link>
           <button type="button" onClick={logout}>
             Se déconnecter
           </button>
