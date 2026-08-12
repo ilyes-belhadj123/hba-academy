@@ -1,0 +1,101 @@
+.admin-leads {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.admin-leads__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.admin-leads__header h1 {
+  font-size: 1.3rem;
+}
+
+.admin-leads__header div {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.admin-leads__header button {
+  background: #f0f0f4;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-leads__filters {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.admin-leads__filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.admin-leads__filters select {
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d8d8e0;
+  font-size: 0.9rem;
+}
+
+.admin-leads__export {
+  background: #6c4bd6;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-leads__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-leads__table th,
+.admin-leads__table td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.admin-leads__source-badge {
+  background: #ece6fb;
+  color: #3f2b8c;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.admin-leads__table select {
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.4rem;
+  border: 1px solid #d8d8e0;
+  font-size: 0.85rem;
+}
+
+.admin-leads__empty {
+  color: #666;
+  text-align: center;
+  padding: 2rem 0;
+}

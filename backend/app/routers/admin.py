@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, UploadFile, status
+from datetime import datetime
+
+from fastapi import APIRouter, Depends, Response, UploadFile, status
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.core.deps import require_roles
@@ -8,16 +10,20 @@ from app.models.apprenant import ApprenantIn, ApprenantOut, EnrollIn
 from app.models.document import DocumentOut
 from app.models.formateur import FormateurIn, FormateurOut, FormateurUpdate
 from app.models.formation import FormationIn, FormationOut, FormationUpdate
+from app.models.lead import LeadOut, LeadUpdateIn
 from app.models.realisation import RealisationIn, RealisationOut, RealisationUpdate
 from app.models.session import SessionIn, SessionOut, SessionUpdate
+from app.models.stats import StatsOut
 from app.models.temoignage import TemoignageIn, TemoignageOut, TemoignageUpdate
 from app.services import (
     apprenants_service,
     documents_service,
     formateurs_service,
     formations_service,
+    leads_service,
     realisations_service,
     sessions_service,
+    stats_service,
     temoignages_service,
 )
 from app.services.storage_service import compress_image_if_needed, get_storage
@@ -194,3 +200,37 @@ async def upload_document(
     storage = get_storage()
     storage_url = await storage.save(content, file.filename or "document", file.content_type or "application/octet-stream")
     return await documents_service.create_document(db, apprenant_id, titre, storage_url, formation_id)
+
+
+@router.get("/leads", response_model=list[LeadOut])
+async def list_leads(
+    source: str | None = None, statut: str | None = None, db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    return await leads_service.list_leads(db, source=source, statut=statut)
+
+
+@router.get("/leads/export")
+async def export_leads(db: AsyncIOMotorDatabase = Depends(get_db)):
+    csv_content = await leads_service.export_leads_csv(db)
+    return Response(
+        content=csv_content,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=leads.csv"},
+    )
+
+
+@router.patch("/leads/{lead_id}", response_model=LeadOut)
+async def update_lead(lead_id: str, payload: LeadUpdateIn, db: AsyncIOMotorDatabase = Depends(get_db)):
+    lead = await leads_service.update_lead_statut(db, lead_id, payload.statut)
+    if lead is None:
+        raise AppError("Lead introuvable", status_code=status.HTTP_404_NOT_FOUND)
+    return lead
+
+
+@router.get("/stats", response_model=StatsOut)
+async def get_stats(
+    date_debut: datetime | None = None,
+    date_fin: datetime | None = None,
+    db: AsyncIOMotorDatabase = Depends(get_db),
+):
+    return await stats_service.get_stats(db, date_debut=date_debut, date_fin=date_fin)

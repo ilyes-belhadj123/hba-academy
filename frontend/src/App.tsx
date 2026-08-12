@@ -14,8 +14,10 @@ import { RealisationsPage } from './pages/RealisationsPage'
 import { AdminApprenantsPage } from './pages/admin/AdminApprenantsPage'
 import { AdminFormateursPage } from './pages/admin/AdminFormateursPage'
 import { AdminFormationsPage } from './pages/admin/AdminFormationsPage'
+import { AdminLeadsPage } from './pages/admin/AdminLeadsPage'
 import { AdminLoginPage } from './pages/admin/AdminLoginPage'
 import { AdminRealisationsPage } from './pages/admin/AdminRealisationsPage'
+import { AdminStatsPage } from './pages/admin/AdminStatsPage'
 import { AdminTemoignagesPage } from './pages/admin/AdminTemoignagesPage'
 import { PortailDashboardPage } from './pages/portail/PortailDashboardPage'
 import { PortailLoginPage } from './pages/portail/PortailLoginPage'
@@ -74,6 +76,22 @@ function App() {
           element={
             <RequireAdmin>
               <AdminApprenantsPage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/leads"
+          element={
+            <RequireAdmin>
+              <AdminLeadsPage />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/stats"
+          element={
+            <RequireAdmin>
+              <AdminStatsPage />
             </RequireAdmin>
           }
         />

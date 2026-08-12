@@ -57,6 +57,15 @@ export async function apiPut<T>(path: string, body: unknown, token: string): Pro
   return handleResponse<T>(response, path)
 }
 
+export async function apiPatch<T>(path: string, body: unknown, token: string): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(body),
+  })
+  return handleResponse<T>(response, path)
+}
+
 export async function apiDelete<T>(path: string, token: string): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: 'DELETE',

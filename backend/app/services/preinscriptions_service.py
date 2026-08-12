@@ -49,6 +49,7 @@ async def create_preinscription(
         "formation_interet": session["formation_id"],
         "statut": "converti",
         "historique": [],
+        "created_at": datetime.now(timezone.utc),
     }
     lead_result = await db.leads.insert_one(lead)
 
