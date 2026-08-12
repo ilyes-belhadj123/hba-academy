@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { createFormation, deleteFormation, updateFormation } from '../../api/admin'
 import { fetchFormations } from '../../api/formations'
 import { AdminFormationForm } from '../../components/AdminFormationForm/AdminFormationForm'
@@ -46,9 +47,12 @@ export function AdminFormationsPage() {
     <main className="admin-formations">
       <header className="admin-formations__header">
         <h1>Backoffice — Formations</h1>
-        <button type="button" onClick={logout}>
-          Se déconnecter
-        </button>
+        <div>
+          <Link to="/admin/temoignages">Témoignages</Link>
+          <button type="button" onClick={logout}>
+            Se déconnecter
+          </button>
+        </div>
       </header>
 
       {mode === 'list' && (

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, UploadFile, status
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.core.deps import require_roles
@@ -6,7 +6,9 @@ from app.core.errors import AppError
 from app.db.mongodb import get_db
 from app.models.formation import FormationIn, FormationOut, FormationUpdate
 from app.models.session import SessionIn, SessionOut, SessionUpdate
-from app.services import formations_service, sessions_service
+from app.models.temoignage import TemoignageIn, TemoignageOut, TemoignageUpdate
+from app.services import formations_service, sessions_service, temoignages_service
+from app.services.storage_service import compress_image_if_needed, get_storage
 
 router = APIRouter(
     prefix="/admin",
@@ -55,3 +57,43 @@ async def delete_session(session_id: str, db: AsyncIOMotorDatabase = Depends(get
     deleted = await sessions_service.delete_session(db, session_id)
     if not deleted:
         raise AppError("Session introuvable", status_code=status.HTTP_404_NOT_FOUND)
+
+
+@router.post("/medias", status_code=status.HTTP_201_CREATED)
+async def upload_media(file: UploadFile):
+    if not file.content_type or not (file.content_type.startswith("image/") or file.content_type.startswith("video/")):
+        raise AppError("Seuls les fichiers image ou vidéo sont acceptés", status_code=status.HTTP_400_BAD_REQUEST)
+
+    content = await file.read()
+    content = compress_image_if_needed(content, file.content_type)
+
+    storage = get_storage()
+    url = await storage.save(content, file.filename or "media", file.content_type)
+    return {"url": url}
+
+
+@router.get("/temoignages", response_model=list[TemoignageOut])
+async def list_temoignages(db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await temoignages_service.list_all_temoignages(db)
+
+
+@router.post("/temoignages", response_model=TemoignageOut, status_code=status.HTTP_201_CREATED)
+async def create_temoignage(payload: TemoignageIn, db: AsyncIOMotorDatabase = Depends(get_db)):
+    return await temoignages_service.create_temoignage(db, payload)
+
+
+@router.put("/temoignages/{temoignage_id}", response_model=TemoignageOut)
+async def update_temoignage(
+    temoignage_id: str, payload: TemoignageUpdate, db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    temoignage = await temoignages_service.update_temoignage(db, temoignage_id, payload)
+    if temoignage is None:
+        raise AppError("Témoignage introuvable", status_code=status.HTTP_404_NOT_FOUND)
+    return temoignage
+
+
+@router.delete("/temoignages/{temoignage_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_temoignage(temoignage_id: str, db: AsyncIOMotorDatabase = Depends(get_db)):
+    deleted = await temoignages_service.delete_temoignage(db, temoignage_id)
+    if not deleted:
+        raise AppError("Témoignage introuvable", status_code=status.HTTP_404_NOT_FOUND)

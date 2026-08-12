@@ -17,7 +17,11 @@ async function handleResponse<T>(response: Response, path: string): Promise<T> {
   return response.json()
 }
 
-export async function apiGet<T>(path: string, params?: Record<string, string | undefined>): Promise<T> {
+export async function apiGet<T>(
+  path: string,
+  params?: Record<string, string | undefined>,
+  token?: string,
+): Promise<T> {
   const url = new URL(`${API_BASE_URL}${path}`)
 
   if (params) {
@@ -26,7 +30,9 @@ export async function apiGet<T>(path: string, params?: Record<string, string | u
     }
   }
 
-  const response = await fetch(url)
+  const response = await fetch(url, {
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  })
   return handleResponse<T>(response, path)
 }
 

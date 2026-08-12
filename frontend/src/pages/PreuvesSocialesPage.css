@@ -1,0 +1,27 @@
+.preuves-sociales {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.preuves-sociales h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.preuves-sociales h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.preuves-sociales section {
+  margin-bottom: 2rem;
+}
+
+.preuves-sociales__temoignages blockquote {
+  border-left: 3px solid #6c4bd6;
+  padding-left: 1rem;
+  margin: 0 0 1rem;
+  font-style: italic;
+  color: #444;
+}

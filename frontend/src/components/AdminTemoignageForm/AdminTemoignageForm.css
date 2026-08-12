@@ -1,0 +1,93 @@
+.admin-temoignage-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 480px;
+  border: 1px solid #e2e2e8;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.admin-temoignage-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.admin-temoignage-form input,
+.admin-temoignage-form select,
+.admin-temoignage-form textarea {
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d8d8e0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-family: inherit;
+}
+
+.admin-temoignage-form__checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-temoignage-form__media-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.admin-temoignage-form__media-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 0.4rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.admin-temoignage-form__media-list button {
+  border: none;
+  background: none;
+  color: #b3261e;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.admin-temoignage-form__error {
+  color: #b3261e;
+  font-size: 0.85rem;
+}
+
+.admin-temoignage-form__actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.admin-temoignage-form__actions button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-temoignage-form__actions button[type='submit'] {
+  background: #6c4bd6;
+  color: #fff;
+}
+
+.admin-temoignage-form__cancel {
+  background: #eee;
+  color: #333;
+}

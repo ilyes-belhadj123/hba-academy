@@ -8,11 +8,8 @@ import { useSeo } from '../hooks/useSeo'
 import type { Formation } from '../types/formation'
 import type { FormationSession } from '../types/session'
 import type { Temoignage } from '../types/temoignage'
+import { isVideoUrl } from '../utils/media'
 import './FormationDetailPage.css'
-
-function isVideoUrl(url: string): boolean {
-  return /\.(mp4|webm)$/i.test(url) || url.includes('youtube.com') || url.includes('youtu.be')
-}
 
 export function FormationDetailPage() {
   const { id } = useParams<{ id: string }>()

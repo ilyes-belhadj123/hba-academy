@@ -1,27 +1,27 @@
-.admin-formations {
+.admin-temoignages {
   max-width: 900px;
   margin: 0 auto;
   padding: 1.5rem 1rem 3rem;
 }
 
-.admin-formations__header {
+.admin-temoignages__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.25rem;
 }
 
-.admin-formations__header h1 {
+.admin-temoignages__header h1 {
   font-size: 1.3rem;
 }
 
-.admin-formations__header div {
+.admin-temoignages__header div {
   display: flex;
   gap: 0.8rem;
   align-items: center;
 }
 
-.admin-formations__header button {
+.admin-temoignages__header button {
   background: #f0f0f4;
   border: none;
   border-radius: 999px;
@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.admin-formations__add {
+.admin-temoignages__add {
   background: #6c4bd6;
   color: #fff;
   border: none;
@@ -41,25 +41,25 @@
   margin-bottom: 1rem;
 }
 
-.admin-formations__table {
+.admin-temoignages__table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
 
-.admin-formations__table th,
-.admin-formations__table td {
+.admin-temoignages__table th,
+.admin-temoignages__table td {
   text-align: left;
   padding: 0.6rem 0.5rem;
   border-bottom: 1px solid #eee;
 }
 
-.admin-formations__actions {
+.admin-temoignages__actions {
   display: flex;
   gap: 0.5rem;
 }
 
-.admin-formations__actions button {
+.admin-temoignages__actions button {
   border: none;
   background: #f0f0f4;
   border-radius: 999px;

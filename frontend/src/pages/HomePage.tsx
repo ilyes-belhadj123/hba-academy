@@ -38,6 +38,9 @@ export function HomePage() {
 
       <div className="home-page__cta">
         <Link to="/catalogue">Voir le catalogue des formations</Link>
+        <Link to="/preuves-sociales" className="home-page__cta-secondary">
+          Projets d'élèves & témoignages
+        </Link>
       </div>
     </main>
   )

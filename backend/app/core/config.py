@@ -25,6 +25,12 @@ class Settings(BaseSettings):
     smtp_password: str | None = None
     smtp_from_email: str = "no-reply@hba-academy.example"
 
+    storage_backend: str = "local"
+    uploads_dir: str = "uploads"
+    public_base_url: str = "http://localhost:8000"
+    azure_storage_connection_string: str | None = None
+    azure_storage_container: str = "hba-connect-media"
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [origin.strip() for origin in self.cors_allowed_origins.split(",") if origin.strip()]
