@@ -1,0 +1,62 @@
+.preinscription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 420px;
+}
+
+.preinscription-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.preinscription-form input[type='text'],
+.preinscription-form input[type='email'],
+.preinscription-form input[type='tel'] {
+  padding: 0.55rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d8d8e0;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.preinscription-form__checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.preinscription-form__hint {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.preinscription-form__error {
+  color: #b3261e;
+  font-size: 0.85rem;
+}
+
+.preinscription-form__success {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.preinscription-form button {
+  align-self: flex-start;
+  background: #6c4bd6;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.preinscription-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

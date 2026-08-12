@@ -1,0 +1,43 @@
+.sessions-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sessions-calendar__empty {
+  color: #666;
+}
+
+.sessions-calendar__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid #d8d8e0;
+  background: #fff;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sessions-calendar__item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sessions-calendar__item--active {
+  border-color: #6c4bd6;
+  background: #f1ecfb;
+}
+
+.sessions-calendar__places {
+  font-weight: 600;
+  color: #2e7d32;
+  white-space: nowrap;
+}
+
+.sessions-calendar__places--complet {
+  color: #b3261e;
+}

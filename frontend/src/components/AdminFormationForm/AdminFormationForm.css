@@ -1,0 +1,64 @@
+.admin-formation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 480px;
+  border: 1px solid #e2e2e8;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.admin-formation-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+  flex: 1;
+}
+
+.admin-formation-form input,
+.admin-formation-form select,
+.admin-formation-form textarea {
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d8d8e0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-family: inherit;
+}
+
+.admin-formation-form__row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.admin-formation-form__error {
+  color: #b3261e;
+  font-size: 0.85rem;
+}
+
+.admin-formation-form__actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.admin-formation-form__actions button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-formation-form__actions button[type='submit'] {
+  background: #6c4bd6;
+  color: #fff;
+}
+
+.admin-formation-form__cancel {
+  background: #eee;
+  color: #333;
+}

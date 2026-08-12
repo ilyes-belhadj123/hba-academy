@@ -1,0 +1,48 @@
+import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
+import { login as loginRequest } from '../api/auth'
+import type { DecodedToken } from '../types/auth'
+
+const STORAGE_KEY = 'hba_admin_token'
+
+function decodeToken(token: string): DecodedToken | null {
+  try {
+    const payload = token.split('.')[1]
+    return JSON.parse(atob(payload))
+  } catch {
+    return null
+  }
+}
+
+interface AdminAuthContextValue {
+  token: string | null
+  role: string | null
+  login: (email: string, password: string) => Promise<void>
+  logout: () => void
+}
+
+const AdminAuthContext = createContext<AdminAuthContextValue | null>(null)
+
+export function AdminAuthProvider({ children }: { children: ReactNode }) {
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem(STORAGE_KEY))
+
+  const login = async (email: string, password: string) => {
+    const tokens = await loginRequest(email, password)
+    localStorage.setItem(STORAGE_KEY, tokens.access_token)
+    setToken(tokens.access_token)
+  }
+
+  const logout = () => {
+    localStorage.removeItem(STORAGE_KEY)
+    setToken(null)
+  }
+
+  const role = useMemo(() => (token ? decodeToken(token)?.role ?? null : null), [token])
+
+  return <AdminAuthContext.Provider value={{ token, role, login, logout }}>{children}</AdminAuthContext.Provider>
+}
+
+export function useAdminAuth(): AdminAuthContextValue {
+  const context = useContext(AdminAuthContext)
+  if (!context) throw new Error('useAdminAuth doit être utilisé dans AdminAuthProvider')
+  return context
+}

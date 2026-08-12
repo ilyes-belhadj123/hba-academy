@@ -1,0 +1,80 @@
+.home-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.home-page__hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.home-page__hero h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-page__hero p {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.home-page__profile-content {
+  border-radius: 1rem;
+  background: #fafafa;
+  padding: 1.5rem;
+}
+
+.home-page__filieres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.home-page__filiere-badge {
+  background: #ece6fb;
+  color: #3f2b8c;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.home-page__temoignage {
+  border-left: 3px solid #6c4bd6;
+  padding-left: 1rem;
+  margin: 1.5rem 0 0;
+  font-style: italic;
+  color: #444;
+}
+
+.home-page__temoignage cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #6c4bd6;
+}
+
+.home-page__cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.home-page__cta a {
+  display: inline-block;
+  background: #6c4bd6;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+}
+
+@media (min-width: 640px) {
+  .home-page__hero h1 {
+    font-size: 2.25rem;
+  }
+}
