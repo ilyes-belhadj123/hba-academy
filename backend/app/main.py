@@ -16,6 +16,7 @@ from app.routers import (
     formateurs,
     formations,
     health,
+    orientation,
     preinscriptions,
     realisations,
     sessions,
@@ -65,6 +66,7 @@ def create_app() -> FastAPI:
     app.include_router(temoignages.router, prefix="/api")
     app.include_router(formateurs.router, prefix="/api")
     app.include_router(realisations.router, prefix="/api")
+    app.include_router(orientation.router, prefix="/api")
 
     return app
 

@@ -31,6 +31,10 @@ class Settings(BaseSettings):
     azure_storage_connection_string: str | None = None
     azure_storage_container: str = "hba-connect-media"
 
+    openrouter_api_key: str | None = None
+    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    openrouter_model: str = "anthropic/claude-sonnet-4.5"
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [origin.strip() for origin in self.cors_allowed_origins.split(",") if origin.strip()]

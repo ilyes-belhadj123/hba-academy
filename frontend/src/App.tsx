@@ -5,6 +5,7 @@ import { FormateurDetailPage } from './pages/FormateurDetailPage'
 import { FormateursPage } from './pages/FormateursPage'
 import { FormationDetailPage } from './pages/FormationDetailPage'
 import { HomePage } from './pages/HomePage'
+import { OrientationPage } from './pages/OrientationPage'
 import { PreuvesSocialesPage } from './pages/PreuvesSocialesPage'
 import { RealisationsPage } from './pages/RealisationsPage'
 import { AdminFormateursPage } from './pages/admin/AdminFormateursPage'
@@ -23,6 +24,7 @@ function App() {
       <Route path="/formateurs/:id" element={<FormateurDetailPage />} />
       <Route path="/preuves-sociales" element={<PreuvesSocialesPage />} />
       <Route path="/realisations" element={<RealisationsPage />} />
+      <Route path="/orientation" element={<OrientationPage />} />
       <Route path="/admin/login" element={<AdminLoginPage />} />
       <Route
         path="/admin/formations"
