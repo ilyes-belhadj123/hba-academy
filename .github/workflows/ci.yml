@@ -46,4 +46,21 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements-dev.txt
       - run: python -c "from app.main import app"
-      - run: pytest
+      - name: Wait for MongoDB
+        run: |
+          python -c "
+          import time
+          import pymongo
+          for attempt in range(30):
+              try:
+                  pymongo.MongoClient('mongodb://localhost:27017', serverSelectionTimeoutMS=1000).admin.command('ping')
+                  print('MongoDB is ready')
+                  break
+              except Exception as error:
+                  print(f'Attempt {attempt}: {error}')
+                  time.sleep(1)
+          else:
+              raise SystemExit('MongoDB did not become ready in time')
+          "
+      - run: pytest -v --tb=long
+
