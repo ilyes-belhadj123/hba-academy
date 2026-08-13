@@ -1,0 +1,23 @@
+name: Surveillance de disponibilité
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier que l'URL de santé production est configurée
+        id: check
+        run: |
+          if [ -z "${{ vars.PRODUCTION_HEALTH_URL }}" ]; then
+            echo "vars.PRODUCTION_HEALTH_URL n'est pas configurée — vérification ignorée."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Appeler /health et échouer si la plateforme ne répond pas
+        if: steps.check.outputs.configured == 'true'
+        run: curl --fail --silent --show-error --max-time 10 "${{ vars.PRODUCTION_HEALTH_URL }}"

@@ -1,0 +1,41 @@
+name: Sauvegarde quotidienne MongoDB
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      MONGODB_URI: ${{ secrets.PROD_MONGODB_URI }}
+      MONGODB_DB_NAME: ${{ secrets.PROD_MONGODB_DB_NAME }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier que les secrets de production sont configurés
+        id: check
+        run: |
+          if [ -z "$MONGODB_URI" ]; then
+            echo "MONGODB_URI (secret PROD_MONGODB_URI) n'est pas configuré — sauvegarde ignorée."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-python@v5
+        if: steps.check.outputs.configured == 'true'
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+        if: steps.check.outputs.configured == 'true'
+      - run: python scripts/backup_mongodb.py --out-dir backups
+        if: steps.check.outputs.configured == 'true'
+      - uses: actions/upload-artifact@v4
+        if: steps.check.outputs.configured == 'true'
+        with:
+          name: mongodb-backup-${{ github.run_id }}
+          path: backend/backups
+          retention-days: 35
