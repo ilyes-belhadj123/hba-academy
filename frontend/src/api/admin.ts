@@ -1,8 +1,12 @@
+import { clearCache } from './cache'
 import { apiDelete, apiPost, apiPut } from './client'
 import type { Formation, FormationInput } from '../types/formation'
 
 export function createFormation(payload: FormationInput, token: string): Promise<Formation> {
-  return apiPost<Formation>('/api/admin/formations', payload, token)
+  return apiPost<Formation>('/api/admin/formations', payload, token).then((result) => {
+    clearCache('/api/formations')
+    return result
+  })
 }
 
 export function updateFormation(
@@ -10,9 +14,15 @@ export function updateFormation(
   payload: Partial<FormationInput>,
   token: string,
 ): Promise<Formation> {
-  return apiPut<Formation>(`/api/admin/formations/${id}`, payload, token)
+  return apiPut<Formation>(`/api/admin/formations/${id}`, payload, token).then((result) => {
+    clearCache('/api/formations')
+    return result
+  })
 }
 
 export function deleteFormation(id: string, token: string): Promise<void> {
-  return apiDelete<void>(`/api/admin/formations/${id}`, token)
+  return apiDelete<void>(`/api/admin/formations/${id}`, token).then((result) => {
+    clearCache('/api/formations')
+    return result
+  })
 }
