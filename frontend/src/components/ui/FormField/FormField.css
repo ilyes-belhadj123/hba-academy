@@ -14,7 +14,7 @@
   padding: 0.55rem 0.6rem;
   border-radius: var(--hba-radius-sm);
   border: 1px solid var(--hba-color-border);
-  font-size: var(--hba-font-size-base);
+  font-size: max(var(--hba-font-size-base), 16px);
   font-weight: 400;
   font-family: inherit;
 }

@@ -12,6 +12,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: #444;
+  min-width: 0;
 }
 
 .filter-bar__field select,
@@ -19,18 +20,21 @@
   padding: 0.55rem 0.6rem;
   border-radius: 0.5rem;
   border: 1px solid #d8d8e0;
-  font-size: 0.95rem;
+  font-size: max(0.95rem, 16px);
   font-weight: 400;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .filter-bar {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1024px) {
   .filter-bar {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }

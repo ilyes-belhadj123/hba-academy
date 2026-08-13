@@ -20,7 +20,7 @@
   padding: 0.55rem 0.6rem;
   border-radius: 0.5rem;
   border: 1px solid #d8d8e0;
-  font-size: 0.95rem;
+  font-size: max(0.95rem, 16px);
   font-weight: 400;
 }
 
