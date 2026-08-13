@@ -32,6 +32,8 @@ export function FormateurDetailPage() {
   useSeo({
     title: formateur ? `${formateur.nom} — HBA Academy` : 'Formateur — HBA Academy',
     description: formateur?.bio ?? 'Découvrez nos formateurs chez HBA Academy.',
+    image: formateur?.photo ?? undefined,
+    type: 'profile',
   })
 
   if (notFound) {

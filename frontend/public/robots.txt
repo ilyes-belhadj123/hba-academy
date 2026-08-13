@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /portail
+
+# À compléter avec le domaine de production une fois déployé :
+# Sitemap: https://[domaine-de-production]/sitemap.xml

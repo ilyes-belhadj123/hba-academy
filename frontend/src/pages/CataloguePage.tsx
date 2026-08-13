@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { fetchFilieres, fetchFormations } from '../api/formations'
 import { CatalogueGrid } from '../components/CatalogueGrid/CatalogueGrid'
 import { FilterBar } from '../components/FilterBar/FilterBar'
+import { useSeo } from '../hooks/useSeo'
 import type { Formation, FormationFilters } from '../types/formation'
 import './CataloguePage.css'
 
@@ -17,6 +18,7 @@ function filtersFromSearchParams(searchParams: URLSearchParams): FormationFilter
   return filters
 }
 
+
 export function CataloguePage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const filters = filtersFromSearchParams(searchParams)
@@ -25,6 +27,11 @@ export function CataloguePage() {
   const [formations, setFormations] = useState<Formation[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useSeo({
+    title: 'Catalogue des formations — HBA Academy',
+    description: 'Parcourez toutes les formations HBA Academy et filtrez par filière, âge, durée, niveau et mode.',
+  })
 
   useEffect(() => {
     fetchFilieres()

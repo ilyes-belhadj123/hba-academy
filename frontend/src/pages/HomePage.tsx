@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { fetchRealisations } from '../api/realisations'
 import { ProfileSelector } from '../components/ProfileSelector/ProfileSelector'
 import { getProfileById } from '../data/profiles'
+import { useSeo } from '../hooks/useSeo'
 import { useVisitorProfile } from '../hooks/useVisitorProfile'
 import type { Realisation } from '../types/realisation'
 import './HomePage.css'
@@ -11,6 +12,12 @@ export function HomePage() {
   const { profileId, selectProfile } = useVisitorProfile()
   const profile = getProfileById(profileId)
   const [realisationsMisesEnAvant, setRealisationsMisesEnAvant] = useState<Realisation[]>([])
+
+  useSeo({
+    title: 'HBA Academy — Formations pour parents, jeunes adultes, professionnels et candidats à l\'émigration',
+    description:
+      "Trouvez la formation qui vous correspond chez HBA Academy : orientation personnalisée, catalogue de formations et accompagnement quel que soit votre profil.",
+  })
 
   useEffect(() => {
     fetchRealisations({ mise_en_avant: 'true' }).then(setRealisationsMisesEnAvant)

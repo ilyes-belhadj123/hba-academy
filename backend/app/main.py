@@ -22,6 +22,7 @@ from app.routers import (
     portail,
     preinscriptions,
     realisations,
+    seo,
     sessions,
     temoignages,
 )
@@ -61,6 +62,7 @@ def create_app() -> FastAPI:
         app.mount("/uploads", StaticFiles(directory=uploads_path), name="uploads")
 
     app.include_router(health.router)
+    app.include_router(seo.router)
     app.include_router(formations.router, prefix="/api")
     app.include_router(sessions.router, prefix="/api")
     app.include_router(preinscriptions.router, prefix="/api")

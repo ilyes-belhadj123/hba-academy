@@ -46,6 +46,8 @@ export function FormationDetailPage() {
   useSeo({
     title: formation ? `${formation.titre} — HBA Academy` : 'Formation — HBA Academy',
     description: formation?.description ?? 'Découvrez nos formations chez HBA Academy.',
+    image: formation?.medias.find((media) => !isVideoUrl(media)),
+    type: 'article',
   })
 
   if (notFound) {
