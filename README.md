@@ -6,6 +6,8 @@ Stack : React 18 + TypeScript + Vite (frontend) · FastAPI + Python 3.12 (backen
 
 Voir [HBA_Connect_Tickets_Backlog.md](./HBA_Connect_Tickets_Backlog.md) pour le détail des tickets.
 
+Guide non technique du backoffice pour l'équipe HBA : [GUIDE_BACKOFFICE.md](./GUIDE_BACKOFFICE.md).
+
 ## Démarrage local
 
 ### Avec Docker
